@@ -10,7 +10,7 @@ export async function createUserAccount(user: INewUser) {
             user.email,
             user.password,
             user.name,
-        )
+        );
 
         if (!newAccount) throw Error;
 
@@ -78,5 +78,6 @@ export async function getCurrentUser() {
         return currentUser.documents[0];
     } catch (error) {
         console.log(error);
+        return null;
     }
 }
