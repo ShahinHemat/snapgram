@@ -32,7 +32,7 @@ export type IContextType = {
 
 const AuthContext = createContext<IContextType>(INITIAL_STATE);
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export function AuthProvider ({ children }: { children: React.ReactNode }) {
     const navigate = useNavigate();
     const [user, setUser] = useState<IUser>(INITIAL_USER);
     const [isLoading, setIsLoading] = useState(false);
@@ -71,8 +71,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         /* localStorage.getItem('cookieFallback') === undefined */
         /* || */
         if (
-            localStorage.getItem('cookieFallback') === '[]' /* || */
-            /* localStorage.getItem('cookieFallback') === null */
+            localStorage.getItem('cookieFallback') === '[]' ||
+            localStorage.getItem('cookieFallback') === null 
         ) navigate('/sign-in')
 
         checkAuthUser();
@@ -94,6 +94,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-export default AuthProvider;
+
 
 export const useUserContext = () => useContext(AuthContext);
