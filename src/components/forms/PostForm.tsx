@@ -41,6 +41,13 @@ const PostForm = ({ post, action }: PostFormProps) => {
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof PostValidation>) {
+
+        if (!values.file || values.file.length === 0) {
+            // Show toast message and return without submitting the form
+            toast({ title: 'You must add a picture before submitting this post.' });
+            return;
+        }
+
         if (post && action === 'Update') {
             const updatedPost = await updatePost({
                 ...values,
